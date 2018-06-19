@@ -1,0 +1,1 @@
+{"version":3,"sources":["components/_global.scss"],"names":[],"mappings":"AAAA;EACI,eAAc;EACd,YAAW;EACX,aAAY;EACZ,WAAU;EACV,UAAS;EACT,iBAAgB,EACnB","file":"bundle.css","sourcesContent":["html, body {\n    line-height: 0;\n    width: 100%;\n    height: 100%;\n    padding: 0;\n    margin: 0;\n    overflow: hidden;\n}\n\n"]}
