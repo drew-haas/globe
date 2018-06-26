@@ -2,6 +2,8 @@
 
 A simple globe with lighting options. This is a playground for me to experiment with THREE.js
 
+Link: https://drew-haas.github.io/globe/
+
 ## Installing / Getting started
 
 This is the bare minimum to get the project running in development mode. For a more detailed explanation, [see below](#development).
