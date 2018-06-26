@@ -86,11 +86,55 @@ var main = (function() {
         globe.add(mesh);
     });
 
+    var isDragging = false;
+    var previousMousePosition = {
+        x: 0,
+        y: 0
+    };
+    $(renderer.domElement).on('mousedown', function(e) {
+        isDragging = true;
+    })
+    .on('mousemove', function(e) {
+        //console.log(e);
+        var deltaMove = {
+            x: e.offsetX-previousMousePosition.x,
+            y: e.offsetY-previousMousePosition.y
+        };
+
+        if(isDragging) {
+                
+            var deltaRotationQuaternion = new THREE.Quaternion()
+                .setFromEuler(new THREE.Euler(
+                    toRadians(deltaMove.y * .1),
+                    toRadians(deltaMove.x * .1),
+                    0,
+                    'XYZ'
+                ));
+            
+            globe.quaternion.multiplyQuaternions(deltaRotationQuaternion, globe.quaternion);
+        }
+        
+        previousMousePosition = {
+            x: e.offsetX,
+            y: e.offsetY
+        };
+    });
+
+    function toRadians(angle) {
+        return angle * (Math.PI / 180);
+    }
+    
+    $(document).on('mouseup', function(e) {
+        isDragging = false;
+    });
+
     // Rendering Animation
     function render() {
         // globe animation
-        globe.rotation.y += animationOptions.rotationSpeedY;
-        globe.rotation.x += animationOptions.rotationSpeedX;
+        if(!isDragging) {
+            globe.rotation.y += animationOptions.rotationSpeedY;
+            globe.rotation.x += animationOptions.rotationSpeedX;
+        }
         
         renderer.render(scene, camera);
         requestAnimationFrame(render);
